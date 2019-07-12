@@ -7,5 +7,7 @@ import com.springboot.thymeleaf.crudoperation.model.Employee;
 public interface EmployeeService {
 
 	List<Employee> getAllEmployees();
+
+	Employee save(Employee employee);
 	
 }

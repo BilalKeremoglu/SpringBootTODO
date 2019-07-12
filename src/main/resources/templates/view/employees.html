@@ -15,25 +15,54 @@
 	<div class="row">
 		<div class="col-md-12">
 			<h2>Employee Form</h2>
+			<div class="alert alert-success" th:if=${succesmessage}>
+				<a href="#" class="close" data-dismis="alert" aria-label="close">&times;</a>
+				<strong th:text=${succesmessage}></strong>
+			</div>
+			<div class="alert alert-warning" th:if=${errormessage}>
+				<a href="#" class="close" data-dismis="alert" aria-label="close">&times;</a>
+				<strong th:text=${errormessage}></strong>
+			</div>
 			<form action="#" th:action="@{${isAdd}?'/save':'/update'}" th:object="${employee}" method="post">
 				<div class="form-group">
 					<input type="text" class="form-control" id="firstname" placeholder="First name" th:field="*{firstname}">
-					</input>
 				</div>
 				<div class="form-group">
 					<input type="text" class="form-control" id="lastname" placeholder="last name" th:field="*{lastname}">
-					</input>
 				</div>
 				<div class="form-group">
 					<input type="text" class="form-control" id="email" placeholder="E-Mail" th:field="*{email}">
-					</input>
 				</div>
 				<div class="form-group">
 					<input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number" th:field="*{phoneNumber}">
-					</input>
 				</div>
 				<button type="submit" class="btn btn-default" th:text="${isAdd}?'save':'update'">Submit</button>
 			</form>
+		</div>
+		<div class="col-md-12">
+			<h2>All Employees</h2>
+			<div style="margin-top:10px">
+				<table id="employeeTable" class="table table-striped tyble-bordered" style="width:100%">
+					<thead>
+						<tr>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Email</th>
+							<th>Phone Number</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="employee: ${employees}">
+							<td th:text="${employee.firstname}"></td>
+							<td th:text="${employee.lastname}"></td>
+							<td th:text="${employee.email}"></td>
+							<td th:text="${employee.phoneNumber}"></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>
@@ -44,5 +73,10 @@
 
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#employeeTable').DataTable();
+} );
+</script>
 </body>
 </html>
