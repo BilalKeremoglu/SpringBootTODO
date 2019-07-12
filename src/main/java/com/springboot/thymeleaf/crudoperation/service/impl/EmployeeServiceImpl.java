@@ -2,6 +2,7 @@ package com.springboot.thymeleaf.crudoperation.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -26,6 +27,24 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Override
 	public Employee save(Employee employee) {
 		employee.setCreatedDate(new Date());
+		return employeeRepository.save(employee);
+	}
+
+	@Override
+	public Employee findById(Long id) {
+		Optional<Employee> employee = employeeRepository.findById(id);
+		if(employee.isPresent()) {
+			return employee.get();
+		}else {
+			return null;
+		}
+		
+		
+	}
+
+	@Override
+	public Employee update(Employee employee) {
+		employee.setUpdatedDate(new Date());
 		return employeeRepository.save(employee);
 	}
 
