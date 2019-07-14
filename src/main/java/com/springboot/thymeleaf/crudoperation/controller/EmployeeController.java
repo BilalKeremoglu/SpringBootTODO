@@ -76,4 +76,13 @@ public class EmployeeController {
 			return "view/employees";
 		}
 	}
+	
+	@GetMapping(value="/deleteEmployee/{id}")
+	public String deleteEmployee(@PathVariable Long id,RedirectAttributes redirectAttributes) {
+		
+		employeeService.delete(id);
+		
+		redirectAttributes.addFlashAttribute("succesmessage","Employee deleted succesfuly!");
+		return "redirect:/";
+	}
 }
